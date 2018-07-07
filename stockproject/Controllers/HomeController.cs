@@ -14,11 +14,7 @@ namespace stockproject.Controllers
             return View();
         }
 
-        public PartialViewResult headerBilgi()
-        {
-            return PartialView("~/Views/_Partial/_PartialHeader.cshtml");
-
-        }
+     
 
 
     }
