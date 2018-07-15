@@ -1,0 +1,57 @@
+﻿@model List<stockproject.Models.Category>
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#search-btn').click(function () {
+
+            var CategoryName = $("#CategoryName").val();
+
+            if (CategoryName == "") {
+                $('#search-btn').removeClass('btn-success').addClass('btn-primary');
+            } else {
+                $('#search-btn').removeClass('btn-primary').addClass('btn-success');
+            }
+
+            $.ajax(
+                {
+                    type: "post",
+                    url: "/Category/Search/",
+                    datatype: "json",
+                    data: { 'searching': CategoryName },
+                    success: function (data) {
+                        $('.table tbody').remove();
+                        $(data).each(function (key, value) {
+
+                            var content;
+                            key++;
+                            content = '<tbody><tr>';
+                            content += '<td>' + key + '</td>';
+                            content += '<td>' + value.CategoryName + '</td>';
+                            content += '<td>' + value.Description + '</td>';
+                            content += '<td>';
+
+                            content += '<a class="fa fa-pencil btn btn-success" href="/Category/Edit/' + value.CategoryId + '"></a>';
+
+                            content += '<a href="/Category/Delete/' + value.CategoryId + '" onclick="return confirm("Dikkat: Bu kaydı silmek istediğinizden emin misiniz?")" class="fa fa-trash btn btn-danger "></a>';
+
+                            content += '</<tr></tbody>';
+
+                            $('.table').append(content);
+                        });
+                    }
+                })
+        })
+
+    })
+</script>
+<div class="input-group col-md-4">
+    <input id="CategoryName" type="text" class="form-control">
+    <span class="input-group-btn">
+        <button id="search-btn" type="button" class="btn btn-primary">Ara!</button>
+    </span>
+</div>
+<div id="result">
+
+
+</div>

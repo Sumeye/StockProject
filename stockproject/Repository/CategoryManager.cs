@@ -17,6 +17,9 @@ namespace stockproject.Repository
             db.Category.Remove(db.Category.Find(itemId));
             db.SaveChanges();
         }
+
+      
+
         public void Insert(Category obj)
         {
             db.Category.Add(obj);
@@ -41,6 +44,7 @@ namespace stockproject.Repository
             db.Entry(item).State = EntityState.Modified;
             db.SaveChanges();
         }
+
        
     }
 }

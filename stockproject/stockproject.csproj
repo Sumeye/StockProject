@@ -4464,6 +4464,7 @@
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\List.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\_Partial\_Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

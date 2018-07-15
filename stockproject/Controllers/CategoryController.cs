@@ -14,11 +14,30 @@ namespace stockproject.Controllers
         stockdbEntities db = new stockdbEntities();
         CategoryManager cm = new CategoryManager();
         // GET: Category
+   
         public ActionResult List()
         {
-           var data= cm.List();
+   
+
+            var data = cm.List();
             return View(data);
 
+        }
+        [HttpPost] 
+        public JsonResult Search(string searching)
+        {
+            var term = searching.ToLower();
+              var result  = db.Category.Where
+                (x =>
+                x.CategoryName.ToLower().Contains(term) ||
+                x.Description.ToLower().Contains(term));
+            var kayit = new JsonResult();
+            kayit.Data = result;
+            kayit.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            kayit.ContentEncoding = System.Text.UTF8Encoding.UTF8;
+            kayit.ContentType = "application/json; charset=utf-8";
+
+            return Json(result);
         }
         public ActionResult Create()
         {
@@ -35,7 +54,7 @@ namespace stockproject.Controllers
                 {
                     cm.Insert(cat);
                     cm.Save();
-                    return RedirectToAction("Create");
+                    return RedirectToAction("List");
                 }
             }
             catch (DataException)
