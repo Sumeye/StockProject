@@ -14,11 +14,12 @@ namespace stockproject.Controllers
         stockdbEntities db = new stockdbEntities();
         CategoryManager cm = new CategoryManager();
         // GET: Category
-        public ActionResult Index()
+        public ActionResult List()
         {
-            return View();
-        }
+           var data= cm.List();
+            return View(data);
 
+        }
         public ActionResult Create()
         {
             return View();
@@ -53,50 +54,32 @@ namespace stockproject.Controllers
         [HttpPost]
         public ActionResult Edit(Category category)
         {
-            try
-            {
+           
                 if (ModelState.IsValid)
                 {
-                    cm.Update(category);
-                    cm.Save();
-                    return RedirectToAction("Create");
-
+                    cm.Update(category);                
+                    return RedirectToAction("List");
                 }
-            }
-            catch (DataException)
-            {
-
-                ModelState.AddModelError(string.Empty, "Kayıt güncellenemedi");
-            }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Kayıt hatası");
+                }
+           
+        
             return View(category);
 
         }
-
-        public ActionResult Delete(bool? savechangesError = false,int id = 0)
+        
+        public ActionResult Delete(int id, bool? savechangesError = false)
         {
             if (savechangesError.GetValueOrDefault())
             {
                 ViewBag.ErrorMessage = "Silme işlemi başarısız.";
             }
             Category category = cm.SelectById(id);
-            return View(category);
+            cm.Delete(id);
+            return RedirectToAction("List",category);
         }
-
-        public ActionResult Delete(int id)
-        {
-            try
-            {
-                Category category = cm.SelectById(id);
-                cm.Delete(id);
-                cm.Save();
-            }
-            catch (DataException)
-            {
-                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
-              
-            }
-            return RedirectToAction("Create");
-
-        }
+        
     }
 }

@@ -12,8 +12,8 @@ namespace stockproject.IRepository
     {
         List<T> List();
         //IQueryable<T> List(Expression<Func<T, bool>> where);
-        void Insert(T obj);
-        void Update(T obj);
+        void Insert(T item);
+        void Update(T item);
         void Delete(int itemId);
         void Save();
         T SelectById(int itemId);

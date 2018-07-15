@@ -29,16 +29,17 @@ namespace stockproject.Repository
         }
         public void Save()
         {
-              db.SaveChanges();
+            db.SaveChanges();
         }
-        public Category SelectById(int itemId)
+        public Category SelectById(int id)
         {
-            return db.Category.Find(itemId);
+            return db.Category.Find(id);
             
         }
         public void Update(Category item)
         {
             db.Entry(item).State = EntityState.Modified;
+            db.SaveChanges();
         }
        
     }

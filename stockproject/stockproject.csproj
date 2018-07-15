@@ -115,6 +115,7 @@
     <Content Include="Content\css\maps\jquery-jvectormap-2.0.3.css" />
     <Content Include="Content\images\american-express.png" />
     <Content Include="Content\images\cropper.jpg" />
+    <Content Include="Content\images\edit.png" />
     <Content Include="Content\images\favicon.ico" />
     <Content Include="Content\images\img.jpg" />
     <Content Include="Content\images\inbox.png" />
@@ -4461,6 +4462,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\_Partial\_MenuFooter.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\List.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
